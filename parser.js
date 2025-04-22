@@ -1,6 +1,5 @@
-// parser.js - module for parsing sales order notes into structured variables
-
-const { parseMeasurement } = require('./units');
+// parser.js - CommonJS module for parsing sales order notes
+const { parseMeasurement } = require('./units.js');
 
 /**
  * Parse a block of sales order note text into a structured object.
@@ -12,7 +11,7 @@ const { parseMeasurement } = require('./units');
  * @param {string} notesText - multiline string of sales order notes
  * @returns {Object<string, any>} - mapping of normalized keys to parsed values
  */
-function parseSalesOrderNotes(notesText) {
+function parseNotes(notesText) {
   if (typeof notesText !== 'string') {
     throw new Error(`Expected notesText to be a string, got ${typeof notesText}`);
   }
@@ -27,18 +26,16 @@ function parseSalesOrderNotes(notesText) {
     line = line.trim();
     if (!line) continue;
 
-    // collect URLs anywhere in the line
+    // collect URLs
     const foundUrls = line.match(urlRegex);
     if (foundUrls) urls.push(...foundUrls);
 
     // Expect "Key: Value" pattern
     const idx = line.indexOf(':');
-    if (idx === -1) {
-      continue; // skip non key-value lines
-    }
+    if (idx === -1) continue;
 
-    let key = line.slice(0, idx).trim();
-    let rawValue = line.slice(idx + 1).trim();
+    const key = line.slice(0, idx).trim();
+    const rawValue = line.slice(idx + 1).trim();
 
     // normalize key: lowercase, underscores
     const normKey = key
@@ -48,24 +45,21 @@ function parseSalesOrderNotes(notesText) {
 
     let value;
 
-    // attempt boolean conversion
+    // boolean conversion
     if (/^(yes|y)$/i.test(rawValue)) {
       value = true;
     } else if (/^(no|n)$/i.test(rawValue)) {
       value = false;
     }
-    
-    // attempt measurement parsing
+    // measurement parsing
     else if (measurementRegex.test(rawValue)) {
       try {
         value = parseMeasurement(rawValue);
-      } catch (err) {
-        // leave as raw if parse fails
+      } catch (e) {
         value = rawValue;
       }
     }
-    
-    // otherwise leave as string
+    // fallback to string
     else {
       value = rawValue;
     }
@@ -80,4 +74,4 @@ function parseSalesOrderNotes(notesText) {
   return data;
 }
 
-module.exports = { parseSalesOrderNotes };
+module.exports = { parseNotes };

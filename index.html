@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glass Configurator</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 20px; }
+    .container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100vh; }
+    textarea { width: 100%; height: calc(100% - 40px); padding: 10px; font-family: monospace; font-size: 0.9rem; }
+    button { margin-top: 10px; padding: 10px 20px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Glass Calculations Generator</h1>
+  <div class="container">
+    <div>
+      <h2>Sales Order Notes</h2>
+      <textarea id="notes" placeholder="Paste order notes here..."></textarea>
+      <button id="calc">Calculate Properties</button>
+    </div>
+    <div>
+      <h2>Calculated Properties</h2>
+      <textarea id="output" readonly placeholder="Length, width, thickness, etc."></textarea>
+    </div>
+  </div>
+  <script>
+    // This assumes parser.js and engine.js are loaded and expose parseNotes() and calculateAll()
+    document.getElementById('calc').addEventListener('click', () => {
+      const raw = document.getElementById('notes').value;
+      let parsed;
+      try {
+        parsed = parseNotes(raw);
+      } catch(e) {
+        document.getElementById('output').value = 'Error parsing notes: ' + e.message;
+        return;
+      }
+      const result = calculateAll(parsed);
+      const lines = [];
+      lines.push(`Length: ${result.length}`);
+      lines.push(`Width: ${result.width}`);
+      lines.push(`Thickness: ${result.thickness}`);
+      lines.push(`Boring Placement: ${result.boringPlacement}`);
+      lines.push(`Bore Depth: ${result.boreDepth}`);
+      lines.push(`Bore Box Height: ${result.boreBoxHeight}`);
+      document.getElementById('output').value = lines.join('\n');
+    });
+  </script>
+</body>
+<script type="module">
+    import { parseNotes } from './parser.js';
+    import { calculateAll } from './engine.js';
+
+    const notesEl = document.getElementById('notes');
+    const outputEl = document.getElementById('output');
+    const btn = document.getElementById('calc');
+
+    btn.addEventListener('click', () => {
+      try {
+        const parsed = parseNotes(notesEl.value);
+        const result = calculateAll(parsed);
+
+        outputEl.value = [
+          `Length: ${result.length}`,
+          `Width: ${result.width}`,
+          `Thickness: ${result.thickness}`,
+          `Boring Placement: ${result.boringPlacement}`,
+          `Bore Depth: ${result.boreDepth}`,
+          `Bore Box Height: ${result.boreBoxHeight}`,
+        ].join('\n');
+      } catch (err) {
+        outputEl.value = 'Error: ' + err.message;
+      }
+    });
+  </script>
+  </body>
+  </html>
+  

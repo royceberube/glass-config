@@ -1,7 +1,7 @@
 // __tests__/engine.test.js
 const path = require('path');
 const fs = require('fs');
-const engine = require('../engine');
+const engine = require('../engine'); // Adjust the path as necessary
 
 // Mock a minimal ruleset for a “testdoors.json”
 beforeAll(() => {

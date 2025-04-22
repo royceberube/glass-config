@@ -1,6 +1,7 @@
-const { parseSalesOrderNotes } = require('../src/parser');
+// Parser.test.js - tests for parseNotes in CommonJS form
+const { parseNotes } = require('../parser.js');
 
-describe('parseSalesOrderNotes', () => {
+describe('parseNotes', () => {
   const sampleNotes = `
 1 x Hinged Door - OC - Door - https://rustica.com/provence-interior-door/
 
@@ -15,7 +16,7 @@ Some Custom Note: Fancy Finish
 `;  
 
   test('parses measurements, booleans, strings, and URLs', () => {
-    const data = parseSalesOrderNotes(sampleNotes);
+    const data = parseNotes(sampleNotes);
 
     // measurement parsing
     expect(data.select_width_of_a_single_door_not_the_door_way_opening)
@@ -37,11 +38,11 @@ Some Custom Note: Fancy Finish
 
   test('skips malformed lines and non key-value content', () => {
     const notes = 'Just some text without colon\nAnother Line';
-    const data = parseSalesOrderNotes(notes);
+    const data = parseNotes(notes);
     expect(Object.keys(data)).toEqual([]);
   });
 
   test('throws on non-string input', () => {
-    expect(() => parseSalesOrderNotes(123)).toThrow('Expected notesText to be a string');
+    expect(() => parseNotes(123)).toThrow('Expected notesText to be a string');
   });
 });

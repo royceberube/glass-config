@@ -1,4 +1,4 @@
-const { parseMeasurement } = require('../src/units');
+const { parseMeasurement } = require('../units');
 
 describe('parseMeasurement', () => {
   test('parses feet, inches, and fractional inches', () => {

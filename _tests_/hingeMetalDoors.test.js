@@ -1,4 +1,4 @@
-const hinge = require('../src/hingeMetalDoors.json');
+const hinge = require('../hingeMetalDoors.json');
 
 describe('Hinge Metal Doors JSON', () => {
   test('should load valid JSON with required top-level keys', () => {
