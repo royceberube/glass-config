@@ -1,0 +1,313 @@
+{
+    "calculationBlocks": {
+      "glassLength": [
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["hasGlass"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 2.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 2.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Lander"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - hingedDoorKnobBoringInches + 1.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Lander"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - hingedDoorKnobBoringInches + 1.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Farm Yard"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 36.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Farm Yard"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 36.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Feed Lot"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 49.75"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Feed Lot"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorHeightFT + hingedDoorHeight + HingedHeightInchParts - 50"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["Galley"]}
+          ],
+          "expression": null
+        }
+      ],
+      "glassWidth": [
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["hasGlass"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]},
+            {"option": "calcInches(hingedDoorWidthFT,hingedDoorWidthIN,HingedWidthInchParts)", "condition": ">=", "values": [26]}
+          ],
+          "expression": "23.75"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]},
+            {"option": "calcInches(hingedDoorWidthFT,hingedDoorWidthIN,HingedWidthInchParts)", "condition": ">=", "values": [26]}
+          ],
+          "expression": "23.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]},
+            {"option": "calcInches(hingedDoorWidthFT,hingedDoorWidthIN,HingedWidthInchParts)", "condition": "<", "values": [26]}
+          ],
+          "expression": "hingedDoorWidthFT + hingedDoorWidthIN + HingedWidthInchParts - 2.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]},
+            {"option": "calcInches(hingedDoorWidthFT,hingedDoorWidthIN,HingedWidthInchParts)", "condition": "<", "values": [26]}
+          ],
+          "expression": "hingedDoorWidthFT + hingedDoorWidthIN + HingedWidthInchParts - 2.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Does Not Contain", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorWidthFT + hingedDoorWidthIN + HingedWidthInchParts - 2.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Does Not Contain", "values": ["Isle"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorWidthFT + hingedDoorWidthIN + HingedWidthInchParts - 2.5"
+        }
+      ],
+      "glassThickness": [
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["hasGlass"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedInteriorExterior", "tagValue": false, "condition": "Contains", "values": ["Exterior"]}
+          ],
+          "expression": "0.625"
+        },
+        {
+          "conditions": [
+            {"option": "wineRoomDoor", "tagValue": false, "condition": "Contains", "values": ["Yes (JAMB IS EXTERIOR)"]}
+          ],
+          "expression": "0.625"
+        },
+        {
+          "conditions": [
+            {"option": "hingedInteriorExterior", "tagValue": false, "condition": "Contains", "values": ["Interior"]},
+            {"option": "frenchDoorGlass", "tagValue": true, "condition": "Contains", "values": ["3/16or1/4thick","1/4thick"]}
+          ],
+          "expression": "0.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedInteriorExterior", "tagValue": false, "condition": "Contains", "values": ["Interior"]},
+            {"option": "frenchDoorGlass", "tagValue": true, "condition": "Contains", "values": ["5/32thick"]}
+          ],
+          "expression": "0.15625"
+        },
+        {
+          "conditions": [
+            {"option": "hingedInteriorExterior", "tagValue": false, "condition": "Contains", "values": ["Interior"]},
+            {"option": "frenchDoorGlass", "tagValue": true, "condition": "Contains", "values": ["3/16thick"]}
+          ],
+          "expression": "0.1875"
+        }
+      ],
+      "glassBoringPlacement": [
+        {
+          "conditions": [
+            {"option": "hingedDoorKnobBoring", "tagValue": false, "condition": "Contains", "values": ["Yes"]},
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorKnobBoringInches - 4.125"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorKnobBoringInches - 4.25"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Farm Yard"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorKnobBoringInches - 25.125"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Farm Yard"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "hingedDoorKnobBoringInches - 25.25"
+        }
+      ],
+      "boreDepth": [
+        {
+          "conditions": [
+            {"option": "hingedDoorKnobBoring", "tagValue": false, "condition": "Contains", "values": ["Yes"]},
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement","halfGlass"]},
+            {"option": "handleBoxRollerlatch", "tagValue": false, "condition": "Does Not Contain", "values": ["Carriage Handles"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement"]},
+            {"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Mirror","Double Sided Mirror"]}
+          ],
+          "expression": "3.875"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Lander"]}
+          ],
+          "expression": "3.875"
+        }
+      ],
+      "boreBoxHeight": [
+        {
+          "conditions": [
+            {"option": "hingedDoorKnobBoring", "tagValue": false, "condition": "Contains", "values": ["Yes"]},
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement","halfGlass"]}
+          ],
+          "expression": null
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement"]},
+            {"option": "hingedDoubleDeadboltBore", "tagValue": false, "condition": "Does Not Contain", "values": ["Yes"]}
+          ],
+          "expression": "6"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["fullGlass","hasBoringPlacement"]},
+            {"option": "hingedDoubleDeadboltBore", "tagValue": false, "condition": "Contains", "values": ["Yes"]}
+          ],
+          "expression": "11.5"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Lander"]},
+            {"option": "hingedDoubleDeadboltBore", "tagValue": false, "condition": "Does Not Contain", "values": ["Yes"]}
+          ],
+          "expression": "5.625"
+        },
+        {
+          "conditions": [
+            {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Lander"]},
+            {"option": "hingedDoubleDeadboltBore", "tagValue": false, "condition": "Contains", "values": ["Yes"]}
+          ],
+          "expression": "11.125"
+        }
+      ]
+    },
+    "parts": {
+      "activeGlass": {
+        "include": [
+          {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["hasGlass"]}
+        ],
+        "calculationBlocks": [
+          "glassLength",
+          "glassWidth",
+          "glassThickness",
+          "glassBoringPlacement",
+          "boreDepth",
+          "boreBoxHeight"
+        ],
+        "quantityRules": [
+          {"conditions": [{"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Double Sided Mirror"]}], "quantity": 1},
+          {"conditions": [{"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Double Sided Mirror"]}], "quantity": 2}
+        ]
+      },
+      "passiveGlass": {
+        "include": [
+          {"option": "hingedDoorStyles", "tagValue": true, "condition": "Contains", "values": ["hasGlass"]},
+          {"option": "hingedDoorFunction", "tagValue": false, "condition": "Contains", "values": ["Double Door with T-Astragal & Flush Bolts","Double Doors With Roller Latches","Double Wine Room Door with T-Astragal & Flush Bolts"]}
+        ],
+        "calculationBlocks": [
+          "glassLength",
+          "glassWidth",
+          "glassThickness",
+          "glassBoringPlacement",
+          "boreDepth",
+          "boreBoxHeight"
+        ],
+        "quantityRules": [
+          {"conditions": [{"option": "frenchDoorGlass", "tagValue": false, "condition": "Does Not Contain", "values": ["Double Sided Mirror"]}], "quantity": 1},
+          {"conditions": [{"option": "frenchDoorGlass", "tagValue": false, "condition": "Contains", "values": ["Double Sided Mirror"]}], "quantity": 2}
+        ]
+      },
+      "galleySecondPiece": {
+        "include": [
+          {"option": "hingedDoorStyles", "tagValue": false, "condition": "Contains", "values": ["Galley"]}
+        ],
+        "calculationBlocks": [
+          "glassLength",
+          "glassWidth",
+          "glassThickness"
+        ]
+      }
+    }
+  }
