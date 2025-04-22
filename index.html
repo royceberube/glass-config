@@ -24,6 +24,18 @@
       <textarea id="output" readonly placeholder="Length, width, thickness, etc."></textarea>
     </div>
   </div>
+  <script src="bundle.js"></script>
+<script>
+  document.getElementById('calc').addEventListener('click', () => {
+    try {
+      const parsed = parseNotes(document.getElementById('notes').value);
+      const result = calculateAll(parsed);
+      // …render into #output…
+    } catch (err) {
+      document.getElementById('output').value = err.message;
+    }
+  });
+</script>
   <script>
     // This assumes parser.js and engine.js are loaded and expose parseNotes() and calculateAll()
     document.getElementById('calc').addEventListener('click', () => {

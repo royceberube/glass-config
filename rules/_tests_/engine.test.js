@@ -1,7 +1,8 @@
 // __tests__/engine.test.js
 const path = require('path');
 const fs = require('fs');
-const engine = require('../../engine'); // Adjust the path as necessary
+// point at the root-level engine.js (two levels up from this tests folder)
+const engine = require('../../engine');
 
 // Mock a minimal ruleset for a “testdoors.json”
 beforeAll(() => {
@@ -24,14 +25,16 @@ beforeAll(() => {
     boreBoxHeight: []
   };
   // Write it into rules/testdoors.json
-  const rulesDir = path.join(__dirname, '../rules');
+  // Create mock rules file directly in the `rules/` folder one level above this test directory
+  const rulesDir = path.join(__dirname, '..');
   if (!fs.existsSync(rulesDir)) fs.mkdirSync(rulesDir);
   fs.writeFileSync(path.join(rulesDir, 'testdoors.json'), JSON.stringify(mockRules));
 });
 
 afterAll(() => {
-  // Clean up
-  fs.unlinkSync(path.join(__dirname, '../rules/testdoors.json'));
+  // Clean up the test file we wrote into rules/
+  const fileToRemove = path.join(__dirname, '..', 'testdoors.json');
+  if (fs.existsSync(fileToRemove)) fs.unlinkSync(fileToRemove);
 });
 
 test('calculates length & width from matching rule', () => {

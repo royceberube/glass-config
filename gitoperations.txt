@@ -1,0 +1,35 @@
+You’ll just use the normal Git workflow to pick up your local changes and push them back up to GitHub. In your project folder, open a terminal (or Git Bash) and run:
+
+Check what’s changed
+
+git status
+This will show you which files are new or modified.
+
+Stage your changes
+To stage everything:
+
+git add .
+Or stage individual files:
+
+git add src/parser.js src/parser.test.js
+
+Commit
+Give your commit a brief message describing what you did:
+
+git commit -m "Convert parser.js to CommonJS and add tests"
+Push
+Assuming you cloned or set up your remote as origin and your default branch is main (replace with master if that’s what yours is), run:
+
+git push origin main
+If you haven’t yet added a remote, you’ll need to do that once:
+
+git remote add origin git@github.com:royceberube/glass-config.git
+git push -u origin main
+A couple of gotchas
+Authentication:
+If GitHub prompts for a password, you’ll now need to supply a Personal Access Token (PAT) instead of your account password. You can generate one in your GitHub Settings → Developer Settings → Personal Access Tokens (give it at least the “repo” scope), and use that as your password.
+
+Private repo:
+Since your repo is already set to “Private” on GitHub, no one else will see it unless you explicitly add them as a collaborator.
+
+Let me know if you hit any errors (authentication failures, remote‑not‑found, etc.) and I can help you sort them out!

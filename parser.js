@@ -1,5 +1,5 @@
 // parser.js - CommonJS module for parsing sales order notes
-const { parseMeasurement } = require('./units.js');
+const { parseMeasurement } = require('./rules/units.js');
 
 /**
  * Parse a block of sales order note text into a structured object.
