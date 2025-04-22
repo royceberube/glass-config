@@ -1,5 +1,5 @@
 // Parser.test.js - tests for parseNotes in CommonJS form
-const { parseNotes } = require('../parser.js');
+const { parseNotes } = require('../../parser.js');
 
 describe('parseNotes', () => {
   const sampleNotes = `

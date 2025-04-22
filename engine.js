@@ -128,7 +128,5 @@ function calculateAll(order) {
   return result;
 }
 
-// engine.js
-export function calculateAll(parsed) {
-  // …your implementation…
-}
+// export as CommonJS
+module.exports = { calculateAll };
