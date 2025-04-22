@@ -6,6 +6,24 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load all rule sets from a “rules” folder (either next to this file or at project root)
+const RULE_SETS = {};
+// try __dirname/rules, then fallback to process.cwd()/rules
+let rulesDir = path.join(__dirname, 'rules');
+if (!fs.existsSync(rulesDir)) {
+  rulesDir = path.join(process.cwd(), 'rules');
+}
+if (fs.existsSync(rulesDir)) {
+  fs.readdirSync(rulesDir)
+    .filter(f => f.endsWith('.json'))
+    .forEach(f => {
+      const name = path.basename(f, '.json').toLowerCase();
+      RULE_SETS[name] = require(path.join(rulesDir, f));
+    });
+} else {
+  console.warn(`⚠️  No rules directory found at ${rulesDir}`);
+}
+
 // Default fallbacks if no rule matches
 const DEFAULTS = {
   length: 0,
@@ -16,25 +34,21 @@ const DEFAULTS = {
   boreBoxHeight: 0,
 };
 
-// Load all rule sets from ./rules directory
-const RULE_SETS = {};
-fs.readdirSync(path.join(__dirname, 'rules'))
-  .filter(file => file.endsWith('.json'))
-  .forEach(file => {
-    const key = path.basename(file, '.json');
-    RULE_SETS[key] = require(path.join(__dirname, 'rules', file));
-  });
-
 /**
  * Determine which rule set to use based on order notes
- * e.g. hingedMetalDoors.json keys => 'hingedMetalDoors'
+ * e.g. hingedMetalDoors.json key => 'hingedmetaldoors'
  */
 function loadRules(order) {
-  const style = order['Select Door Style'] || '';
-  // Normalize style to key convention, e.g. "hingedmetaldoors"
+  // For metal-framed hinged doors, always use the hingedmetaldoors rule set
+  const metalFramed = order['Metal Framed Hinged Door?'];
+  if (metalFramed === 'Yes' || metalFramed === true) {
+    return RULE_SETS['hingedmetaldoors'] || {};
+  }
+  const style = (order['Select Door Style'] || '').toString();
+  // Normalize to a key: lowercase alphanumeric + 'doors'
   const key = style
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '') + 'doors';
+    .replace(/[^a-z0-9]/g, '') + 'doors';
   return RULE_SETS[key] || {};
 }
 
@@ -42,7 +56,8 @@ function loadRules(order) {
  * Check if a rule's conditions match the order
  */
 function matchRule(rule, order) {
-  return (rule.conditions || []).every(cond => {
+  const conditions = Array.isArray(rule.conditions) ? rule.conditions : [];
+  return conditions.every(cond => {
     const actual = order[cond.variable];
     const { operator, values } = cond;
     switch (operator) {
@@ -51,9 +66,9 @@ function matchRule(rule, order) {
       case 'notContains':
         return !values.includes(actual);
       case 'gte':
-        return parseFloat(actual) >= parseFloat(values[0]);
+        return Number(actual) >= Number(values[0]);
       case 'lte':
-        return parseFloat(actual) <= parseFloat(values[0]);
+        return Number(actual) <= Number(values[0]);
       default:
         return false;
     }
@@ -64,10 +79,10 @@ function matchRule(rule, order) {
  * Safely evaluate a formula string against order variables
  */
 function evaluateFormula(formula, order) {
-  // Build argument list
-  const args = Object.keys(order);
-  const vals = args.map(k => order[k]);
-  // Create a function: (var1,var2,...) => formula
+  const keys = Object.keys(order);
+  const args = keys;
+  const vals = keys.map(k => order[k]);
+  // eslint-disable-next-line no-new-func
   const fn = new Function(...args, `return ${formula};`);
   return fn(...vals);
 }
@@ -76,7 +91,7 @@ function evaluateFormula(formula, order) {
  * Calculate a single property by finding matching rules and evaluating the last one
  */
 function calculateProperty(order, rules, propName) {
-  const propRules = rules[propName] || [];
+  const propRules = Array.isArray(rules[propName]) ? rules[propName] : [];
   const matches = propRules.filter(r => matchRule(r, order));
   if (matches.length) {
     const rule = matches[matches.length - 1];

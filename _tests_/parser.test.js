@@ -1,4 +1,4 @@
-const { parseSalesOrderNotes } = require('./parser');
+const { parseSalesOrderNotes } = require('../src/parser');
 
 describe('parseSalesOrderNotes', () => {
   const sampleNotes = `
